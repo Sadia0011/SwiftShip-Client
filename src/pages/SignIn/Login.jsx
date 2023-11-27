@@ -52,7 +52,7 @@ const from = location.state?.from?.pathname || "/";
         const user_captchaValue=e.target.value;
         console.log(user_captchaValue);
         if (validateCaptcha(user_captchaValue)==true) {
-            alert('Captcha Matched');
+            // alert('Captcha Matched');
             setDisabled(false)
         }
    
@@ -92,10 +92,13 @@ const from = location.state?.from?.pathname || "/";
            </label>
            <input 
            onBlur={handleValidateCaptcha} 
-           type="text" name='captcha' placeholder="type the captcha above" className="input input-bordered" required /> 
+           type="text" name='captcha' placeholder="type the captcha above" 
+           className="input input-bordered"  /> 
         </div>
          <div className="form-control mt-3">
-           <input disabled={false} type="submit" className='btn btn-primary' value="Login" />
+           <input 
+          //  disabled={false} 
+           type="submit" className='btn btn-primary' value="Login" />
          </div>
        </form>
        <p className='lg:px-10'>New Here? <Link to={"/signup"}>Sign Up</Link></p>

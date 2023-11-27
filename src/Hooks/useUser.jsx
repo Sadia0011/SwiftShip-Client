@@ -10,7 +10,7 @@ const useUser = () => {
     const {refetch,data:bookParcel=[]}=useQuery({
     queryKey:['bookParcel',user?.email],
     queryFn:async()=>{
-        const res=await axiosPublic.get(`/bookParcel?email=${user.email}`)
+        const res=await axiosPublic.get(`/bookParcel/${user.email}`)
         return res.data;
     }
     })

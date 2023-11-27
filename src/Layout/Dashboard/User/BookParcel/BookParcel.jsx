@@ -52,7 +52,7 @@ const handleWeightChange = (e) => {
           latitude: data.latitude,
           longtitude: data.longtitude,
           delivery_date: data.delivery_date,
-          price: parseFloat(data.price),
+          price: data.price,
           bookingDate: new Date() ,
           status:"pending"
       }
@@ -83,7 +83,7 @@ const handleWeightChange = (e) => {
     }
       });
      
-  
+  console.log("price",price)
     }
     return (
         <div>

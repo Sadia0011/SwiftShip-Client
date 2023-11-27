@@ -76,12 +76,17 @@ const Dashboard = () => {
                <h2 className="text-2xl underline italic font-bold text-center mb-3">
                  Deliveryman </h2>
                <li>
-               <NavLink to={"/dashboard/deliveryman/reviews"}> 
-               <FaReact></FaReact> Reviews</NavLink>
+               <NavLink to={"/dashboard/deliveryman/deliverymanHome"}> 
+               <FaHome></FaHome> DeliveryMan Home</NavLink>
             </li>
+               
             <li>
                <NavLink to={"/dashboard/deliveryman/deliveryList"}> 
                <FaList></FaList> Delivery List</NavLink>
+            </li>
+            <li>
+               <NavLink to={"/dashboard/deliveryman/reviews"}> 
+               <FaReact></FaReact> Reviews</NavLink>
             </li>
                </>
             }

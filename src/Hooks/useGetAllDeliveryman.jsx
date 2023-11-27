@@ -11,7 +11,7 @@ const useGetAllDeliveryman = () => {
             return res.data
         }
       })
-      console.log(allDeliveryman)
+    //   console.log(allDeliveryman)
       return[allDeliveryman]
 };
 

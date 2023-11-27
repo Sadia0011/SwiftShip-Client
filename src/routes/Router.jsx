@@ -11,7 +11,6 @@ import MyParcel from '../Layout/Dashboard/User/MyParcel/MyParcel';
 import Profile from '../Layout/Dashboard/User/Profile/Profile';
 import MyDelivaryList from '../Layout/Dashboard/DelivaryMan/MyDelivaryList/MyDelivaryList';
 import Reviews from '../Layout/Dashboard/DelivaryMan/Reviews/Reviews';
-import AllParcel from '../Layout/Dashboard/Admin/AllParcel/AllParcel';
 import AllUsers from '../Layout/Dashboard/Admin/AllUsers/AllUsers';
 import AllDeliveryman from '../Layout/Dashboard/Admin/AllDeliveryman/AllDeliveryman';
 import Statistics from '../Layout/Dashboard/Admin/Statistics/Statistics';
@@ -23,6 +22,8 @@ import AdminRoute from './AdminRoute';
 import PrivateRoute from './PrivateRoute';
 import AdminHome from '../Layout/Dashboard/Admin/AdminHome/AdminHome';
 import UseHome from '../Layout/Dashboard/User/UserHome/UseHome';
+import AllOfPercels from '../Layout/Dashboard/Admin/AllOfParcels/AllOfPercels';
+import DeliverymanHome from '../Layout/Dashboard/DelivaryMan/DeliverymanHome/DeliverymanHome';
 
   
 export  const router = createBrowserRouter([
@@ -70,6 +71,10 @@ export  const router = createBrowserRouter([
             element:<Profile></Profile>
         },
         {
+            path:"deliveryman/deliverymanHome",
+            element:<DeliverymanRoute><DeliverymanHome></DeliverymanHome> </DeliverymanRoute>
+        },
+        {
             path:"deliveryman/deliveryList",
             element:<DeliverymanRoute><MyDelivaryList></MyDelivaryList></DeliverymanRoute>
         },
@@ -83,7 +88,7 @@ export  const router = createBrowserRouter([
         },
         {
             path:"admin/allParcel",
-            element:<AdminRoute><AllParcel></AllParcel></AdminRoute>
+            element:<AdminRoute><AllOfPercels></AllOfPercels> </AdminRoute>
         },
         {
             path:"admin/allUsers",

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import useUser from '../../../../Hooks/useUser';
 import SectionTitle from '../../../../components/SectionTitle/SectionTitle';
 import useAuth from '../../../../Hooks/useAuth';
@@ -10,28 +10,19 @@ import useAxiosPublic from '../../../../Hooks/useAxiosPublic';
 const MyParcel = () => {
     const[bookParcel,refetch]=useUser();
     const [disabled,setDisabled]=useState(true)
+    const [disabledPay,setDisabledPay]=useState(true)
     const {user}=useAuth()
     const navigate=useNavigate()
+    const [bookingParcel,setBookingParcel]=useState([])
     // const axiosSecure=useAxiosSecure()
     const axiosPublic=useAxiosPublic()
-    const handleStatus=(parcel)=>{
-      console.log(parcel)
-      Swal.fire({
-        title: "Are you sure?",
-        text: "You want to make payment!",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes"
-      }).then((result) => {
-        if (result.isConfirmed) {
-          console.log("make payment and change the pending to payment done")
-        }
-      });
-    }
+    useEffect(()=>{
+      setBookingParcel(bookParcel)
+    },[bookParcel])
+    
+  console.log(bookingParcel)
     const handleDelete=(parcel)=>{
-      console.log(parcel)
+      console.log(parcel.status)
       Swal.fire({
         title: "Are you sure?",
         text: "You won't be able to revert this!",
@@ -52,6 +43,13 @@ const MyParcel = () => {
           });
           refetch()
        }
+       else{
+        Swal.fire({
+          title: "you can't delete this file!",
+          text: "Delete if the status is pending",
+          icon: "success"
+        });
+       }
         
         }
       });
@@ -66,12 +64,50 @@ const MyParcel = () => {
             setDisabled(false)
         }
     }
+    const handlePay=(parcel)=>{
+        console.log(parcel)
+        if(parcel.status ==='pending'){
+            setDisabledPay(true)
+        }
+        else{
+            setDisabledPay(false)
+        }
+    }
+
+
+    const handleSearch=e=>{
+      e.preventDefault();
+      const form=e.target;
+      const search_status=e.target.search_status.value.toLowerCase();
+      // console.log(search_status)
+      if (search_status.trim() !== "") {
+          const filteredBookings = bookParcel.filter(
+            food => food.status.toLowerCase().includes(search_status)
+          );
+          setBookingParcel(filteredBookings);
+          form.reset();
+  }
+  else{
+      setBookingParcel(bookParcel)
+  }
+  }
+console.log("hello",bookingParcel)
     return (
         <div>
            <SectionTitle heading={`${user.displayName}'s Bookings`} subheading={"All Booking Parcels"}></SectionTitle>
         
+           <div>
+        <form onSubmit={handleSearch}>
+        <div className="join">
+  <input name='search_status' className="input input-bordered join-item" placeholder="Search by status"/>
+  <button className="btn join-item rounded-r-full">Search</button>
+</div>
+        </form>
+       </div>
+
+
         <div>
-        <div className="overflow-x-hidden">
+        <div className="overflow-x-">
   <table className="table w-10/12">
     {/* head */}
     <thead>
@@ -90,15 +126,14 @@ const MyParcel = () => {
       </tr>
     </thead>
     <tbody>
-      {bookParcel.map((parcel,index)=><tr key={parcel._id} className="bg-base-200">
+      {bookingParcel.map((parcel,index)=><tr key={parcel._id} className="bg-base-200">
         <th>{index+1}</th>
         <td>{parcel?.type}</td>
         <td>{parcel?.delivery_date}</td>
-        <td></td>
+        <td>{parcel?.approximate_delivery_date ? parcel.approximate_delivery_date : "Not Assigned"}</td>
         <td>{parcel?.bookingDate}</td>
-        <td></td>
-        <td>
-            <button onClick={()=>handleStatus(parcel)} className='btn btn-sm bg-slate-300 text-black btn-primary'>{parcel?.status}</button></td>
+        <td>{parcel?.deliverymanId ? parcel.deliverymanId : "Not Assigned"}</td>
+        <td>{parcel?.status}</td>
         <td>
           <Link to={`/dashboard/user/updateParcel/${parcel._id}`}> 
           <button className='btn btn-sm bg-slate-300 text-black btn-primary'>Update</button>
@@ -110,7 +145,7 @@ const MyParcel = () => {
      <button disabled={disabled} onClick={()=>handleReview(parcel)} className='btn btn-sm bg-slate-300 text-black btn-primary'>Review</button>
      </td>
      <td>
-     <button className='btn btn-sm bg-slate-300 text-black btn-primary'>Pay</button>
+     <button disabled={disabledPay} onClick={()=>handlePay(parcel)}  className='btn btn-sm bg-slate-300 text-black btn-primary'>Pay</button>
      </td>
      
      

@@ -25,10 +25,10 @@ const AllDeliveryman = () => {
       {allDeliveryman.map((deliveryman,index)=><tr
       key={deliveryman._id}>
         <th>{index+ 1}</th>
-        <td>{deliveryman.displayName}</td>
+        <td>{deliveryman.name}</td>
+        <td>{deliveryman?.phone}</td>
         <td>{}</td>
-        <td>Blue</td>
-        <td>Blue</td>
+        <td>{}</td>
       </tr>)}
       
      
