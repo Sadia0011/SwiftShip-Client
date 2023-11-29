@@ -24,6 +24,9 @@ import AdminHome from '../Layout/Dashboard/Admin/AdminHome/AdminHome';
 import UseHome from '../Layout/Dashboard/User/UserHome/UseHome';
 import AllOfPercels from '../Layout/Dashboard/Admin/AllOfParcels/AllOfPercels';
 import DeliverymanHome from '../Layout/Dashboard/DelivaryMan/DeliverymanHome/DeliverymanHome';
+import Payment from '../Layout/Dashboard/Payment/Payment';
+import Success from '../Layout/Dashboard/Payment/Success';
+import PaymentHistory from '../Layout/Dashboard/User/PaymentHistory/PaymentHistory';
 
   
 export  const router = createBrowserRouter([
@@ -56,6 +59,16 @@ export  const router = createBrowserRouter([
         {
             path:"user/userHome",
             element:<UseHome></UseHome>
+        },
+        {
+            path:"user/paymentHistory",
+            element:<PaymentHistory></PaymentHistory>
+        },
+        
+        {
+            path:"payment/:id",
+            element:<Payment></Payment>,
+            loader:({params})=>fetch(`http://localhost:5000/bookParcelForOneItem/${params.id}`)
         },
         {
             path:"user/updateParcel/:id",
@@ -105,6 +118,12 @@ export  const router = createBrowserRouter([
 
 
       ]
+    },
+    {
+      
+        path:"/paymentSuccess",
+        element:<Success></Success>
+    
     }
   ]);
 

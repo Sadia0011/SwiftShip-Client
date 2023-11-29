@@ -5,6 +5,8 @@ import { FaList } from 'react-icons/fa';
 import useAuth from '../../../../Hooks/useAuth';
 import useAxiosPublic from '../../../../Hooks/useAxiosPublic';
 import Swal from 'sweetalert2';
+import moment from 'moment';
+import { useNavigate } from 'react-router-dom';
 // import TitleHelmet from '../../../../components/TitleHelmet'
 const BookParcel = () => {
     const {
@@ -18,8 +20,7 @@ const BookParcel = () => {
     const [price, setPrice] = useState(50); 
     const {user}=useAuth()
     const axiosPublic=useAxiosPublic()
-//     const  date=new Date()
-// console.log("bookingDate:",date )
+    const navigate=useNavigate()
 const handleWeightChange = (e) => {
   console.log("Hello from handle weight chnge")
   const newWeight = e.target.value;
@@ -52,8 +53,8 @@ const handleWeightChange = (e) => {
           latitude: data.latitude,
           longtitude: data.longtitude,
           delivery_date: data.delivery_date,
-          price: data.price,
-          bookingDate: new Date() ,
+          price: price,
+          bookingDate: moment().format('l') ,
           status:"pending"
       }
       // 
@@ -71,7 +72,11 @@ const handleWeightChange = (e) => {
       console.log(parcelRes.data)
       if(parcelRes.data.insertedId){
           // show success popup
-          reset();
+          const updateUser=await axiosPublic.patch(`/userParcelCount/${user.email}`)
+          console.log("user parcel count updated",updateUser.data)
+          if(updateUser.data.modifiedCount > 0){
+            reset();
+            navigate("/dashboard/user/myParcel")
           Swal.fire({
               position: "top-end",
               icon: "success",
@@ -79,6 +84,8 @@ const handleWeightChange = (e) => {
               showConfirmButton: false,
               timer: 1500
             });
+          }
+          
       }
     }
       });

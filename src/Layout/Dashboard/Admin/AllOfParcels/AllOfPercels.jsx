@@ -183,6 +183,7 @@ const AllOfPercels = () => {
 
         <td>
         <button className="btn bg-blue-400 btn-sm" 
+        disabled={parcel.status !=='pending'}
         onClick={()=>handleManageButton(parcel)}>Manage</button>
 
 <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">

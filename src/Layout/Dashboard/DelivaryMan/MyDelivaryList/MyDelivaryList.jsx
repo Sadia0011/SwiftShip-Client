@@ -20,11 +20,12 @@ const MyDelivaryList = () => {
     .then(res=>{
      console.log(res.data)
      if(res.data.modifiedCount >0){
+
       refetch()
       Swal.fire({
           position: "top-end",
           icon: "success",
-          title: `${parcel?.type} is  ${parcel?.status} now`,
+          title: `${parcel?.type} is  canceled now`,
           showConfirmButton: false,
           timer: 1500
         });
@@ -41,14 +42,22 @@ const MyDelivaryList = () => {
     .then(res=>{
      console.log(res.data)
      if(res.data.modifiedCount >0){
-      refetch()
-      Swal.fire({
-          position: "top-end",
-          icon: "success",
-          title: `${parcel?.type} is  ${parcel?.status} now`,
-          showConfirmButton: false,
-          timer: 1500
-        });
+      axiosSecure.patch(`deliveredParcelCount/${user.email}`)
+      .then(deliverymanRes=>{
+        console.log("deliveryman updated",deliverymanRes.data)
+        if(deliverymanRes.data.modifiedCount >0){
+          refetch()
+          Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: `${parcel?.type} is  delivered now`,
+              showConfirmButton: false,
+              timer: 1500
+            });
+            
+        }
+      })
+      
   }
 })
    }

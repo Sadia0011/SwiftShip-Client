@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import useUser from '../../../../Hooks/useUser';
 import SectionTitle from '../../../../components/SectionTitle/SectionTitle';
-import { useLoaderData } from 'react-router-dom';
+import { Navigate, useLoaderData, useNavigate } from 'react-router-dom';
 import useAuth from '../../../../Hooks/useAuth';
 import useAxiosPublic from '../../../../Hooks/useAxiosPublic';
 import { useForm } from 'react-hook-form';
@@ -13,6 +13,7 @@ const UpdateParcel = () => {
     const parcel=useLoaderData()
     const {user}=useAuth()
     const axiosSecure=useAxiosSecure()
+    const navigate=useNavigate()
 console.log(parcel)
 const {
     register,
@@ -75,6 +76,7 @@ const onSubmit = (data) => {
   if(parcelRes.data.modifiedCount >0){
       // show success popup
       reset();
+      navigate("/dashboard/user/myParcel")
       Swal.fire({
           position: "top-end",
           icon: "success",
@@ -82,6 +84,8 @@ const onSubmit = (data) => {
           showConfirmButton: false,
           timer: 1500
         });
+        
+        // <Navigate to={"dashboard/user/myParcel"} replace:true/>
   }
 }
   });

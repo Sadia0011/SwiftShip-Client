@@ -10,39 +10,7 @@ import "./AllUsers.css"
 
 const AllUsers = () => {
     const axiosSecure=useAxiosSecure();
-    
-    // const {data: allUsers=[],refetch}=useQuery({
-    //     queryKey:["allUser"],
-    //     queryFn:async()=>{
-    //      const res= await axiosSecure.get("/users")
-    //      console.log(res.data)
-    //      return res.data
-    //     }
-    // })
    
-  //   const parcelBooked =  (email) => {
-  //     const url=`http://localhost:5000/parcelBooked/${email}`
-  //     const result =  fetch(url);
-     
-      
-  //     console.log(result)
-  //     return result.parcelBooked;
-  //  }
-
-const parcelBooked=(email)=>{
-  let temp;
-       console.log("hello from parcel booked",email);
-      fetch(`http://localhost:5000/parcelBooked/${email}`)
-        .then(res=>res.json())
-        .then(data=>{
-        console.log("email",email,data.parcelBooked);
-         temp=data.parcelBooked;
-        console.log(temp);
-        
-        })
-     return temp;
-      }
-  
     const handleMakeAdmin=(user)=>{
         console.log("Making user admin:", user._id);
       axiosSecure.patch(`/users/admin/${user._id}`)
@@ -110,11 +78,6 @@ pages.push(i)
         setRealUsers(res.data)
         setUsers(res.data)
       })
-        // fetch(`http://localhost:5000/users?page=${currentPage}&size=${itemsPerPage}`)
-            // .then(res => res.json())
-            // .then(data => {
-            // setRealUsers(data)
-            // setUsers(data)})
     }, [axiosSecure,currentPage,itemsPerPage]);
 console.log("users",users)
 console.log("real users",realUsers)
@@ -143,7 +106,7 @@ console.log("real users",realUsers)
 <SectionTitle heading={"All Users"} subheading={"User's Information"}></SectionTitle>
             <div>
             <div className="overflow-x-auto">
-  <table className="table table-zebra overflow-x-auto">
+  <table className="table  table-xs overflow-x-auto">
     {/* head */}
     <thead>
       <tr>
@@ -162,7 +125,7 @@ console.log("real users",realUsers)
         <td>{user?.name}</td>
         <td>{user?.phone}</td>
         <td>
-          {parcelBooked(user.email)}
+          {user?.bookParcelCount ? user.bookParcelCount : 0}
         </td>
         <td> {user.role === 'admin' ?'Admin': <button
           onClick={()=>handleMakeAdmin(user)}

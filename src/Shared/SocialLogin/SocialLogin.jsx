@@ -18,6 +18,7 @@ const SocialLogin = () => {
                 email:res.user?.email,
                 name:res.user?.displayName,
                 phone:res.user?.phoneNumber,
+                image:res.user?.photoURL,
                 role:"user"
             }
             axiosPublic.post("/users",userInfo)

@@ -27,8 +27,8 @@ const AllDeliveryman = () => {
         <th>{index+ 1}</th>
         <td>{deliveryman.name}</td>
         <td>{deliveryman?.phone}</td>
-        <td>{}</td>
-        <td>{}</td>
+        <td>{deliveryman?.deliveredParcelCount ? deliveryman.deliveredParcelCount : 0  }</td>
+        <td>{deliveryman?.sum && deliveryman?.reviewedParcelCount ? ((deliveryman.sum)/(deliveryman.reviewedParcelCount)) :0}</td>
       </tr>)}
       
      

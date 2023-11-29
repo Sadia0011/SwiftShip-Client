@@ -69,6 +69,10 @@ const Dashboard = () => {
                <NavLink to={"/dashboard/user/profile"}> 
                <FaUser></FaUser> Profile </NavLink>
             </li>
+            <li>
+               <NavLink to={"/dashboard/user/paymentHistory"}> 
+               <FaList></FaList> Payment History </NavLink>
+            </li>
             
             </>}
             {isDeliveryman===true && 
