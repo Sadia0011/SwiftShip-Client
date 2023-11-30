@@ -181,25 +181,41 @@ axiosSecure.patch(`/updateBookParcelFromUser/${selectedParcel._id}`,updateParcel
      <button disabled={parcel.status !== 'delivered'} onClick={()=>handleReview(parcel)} className='btn btn-sm bg-slate-300 text-black btn-primary'>Review</button>
     
      <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
-  <div className="modal-box">
+  <div className="modal-box bg-slate-100">
   <div>
     <form onSubmit={handleAssign}>
     
-    <div className="flex gap-6">
-                        
-    <div className="form-control w-full my-6">
+    <div className="flex flex-col gap-6">
+           <div className="form-control w-full my-2">
+        <input 
+            type="text"
+            value={user.displayName}
+            className='text-2xl uppercase font-semibold text-center bg-slate-100'
+            readOnly
+             />
+            </div>             
+    <div className="form-control w-full my-2">
+        <div className="avatar flex justify-center items-center">
+  <div className="w-28 rounded-full">
+    <img src={user.photoURL}
+    className="w-full h-full object-cover" />
+  </div>
+</div>
+       
+            </div>             
+    <div className="form-control w-full my-2">
         <label className="label">
             <span className="label-text">Feedback Text.*</span>
         </label>
         <textarea 
-        className="textarea" 
+        className="textarea border border-black" 
         placeholder='Feedback Text.' 
         name="feedback_Text" 
         required >
  </textarea>
     </div>
     </div>
-    <div className="form-control w-full my-6">
+    <div className="form-control w-full my-2">
         <label className="label">
             <span className="label-text">Review*</span>
         </label>
@@ -217,13 +233,23 @@ axiosSecure.patch(`/updateBookParcelFromUser/${selectedParcel._id}`,updateParcel
            
         </select>
     </div>
-    <button className='btn'>Assign</button>
+    <div className="form-control w-full my-2">
+           <label className="label">
+            <span className="label-text">DeliverymanId</span>
+            <input 
+            type="text"
+            value={parcel.deliverymanId}
+            readOnly
+             />
+        </label>
+            </div> 
+    <button className='btn bg-slate-300 hover:bg-blue-300'>Assign</button>
     </form>
   </div>
     <div className="modal-action">
       <form method="dialog">
         {/* if there is a button in form, it will close the modal */}
-        <button className="btn">Close</button>
+        <button className=" btn bg-slate-300 hover:bg-red-500">Close</button>
       </form>
     </div>
   </div>

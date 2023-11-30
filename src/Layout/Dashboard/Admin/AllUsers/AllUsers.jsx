@@ -52,7 +52,7 @@ axiosSecure.patch(`/users/deliveryman/${user._id}`)
     const [users,setUsers]=useState([])
     const [realUsers,setRealUsers]=useState([])
     useEffect(()=>{
-        fetch("http://localhost:5000/itemsCount")
+        fetch("https://swiftship-server.vercel.app/itemsCount")
         .then(res=>res.json())
         .then(data=>setCount(data))
         // console.log({count})

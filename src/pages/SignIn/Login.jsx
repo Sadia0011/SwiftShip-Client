@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
-import { loadCaptchaEnginge, LoadCanvasTemplate, 
-    LoadCanvasTemplateNoReload, validateCaptcha } from 'react-simple-captcha';
+// import { loadCaptchaEnginge, LoadCanvasTemplate, 
+    // LoadCanvasTemplateNoReload, validateCaptcha } from 'react-simple-captcha';
 
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
@@ -15,9 +15,9 @@ const {singIn}=useContext(AuthContext)
 const navigate=useNavigate();
 const location=useLocation()
 const from = location.state?.from?.pathname || "/";
-    useEffect(()=>{
-        loadCaptchaEnginge(6)
-    },[])
+    // useEffect(()=>{
+    //     loadCaptchaEnginge(6)
+    // },[])
     const handleLogin=e=>{
         e.preventDefault();
         const form=e.target;
@@ -48,19 +48,19 @@ const from = location.state?.from?.pathname || "/";
               navigate(from, { replace: true });
         })
     }
-    const handleValidateCaptcha=(e)=>{
-        const user_captchaValue=e.target.value;
-        console.log(user_captchaValue);
-        if (validateCaptcha(user_captchaValue)==true) {
-            // alert('Captcha Matched');
-            setDisabled(false)
-        }
+    // const handleValidateCaptcha=(e)=>{
+    //     const user_captchaValue=e.target.value;
+    //     console.log(user_captchaValue);
+    //     if (validateCaptcha(user_captchaValue)==true) {
+    //         // alert('Captcha Matched');
+    //         setDisabled(false)
+    //     }
    
-        else {
-            // alert('Captcha Does Not Match');
-            setDisabled(true)
-        }
-    }
+    //     else {
+    //         // alert('Captcha Does Not Match');
+    //         setDisabled(true)
+    //     }
+    // }
     return (
         <>
    <TitleHelmet title={"Login"}></TitleHelmet>
@@ -86,7 +86,7 @@ const from = location.state?.from?.pathname || "/";
            </label>
            <input type="password" name='password' placeholder="password" className="input input-bordered" required />
          </div>
-         <div className="form-control">
+         {/* <div className="form-control">
            <label className="label">
            <LoadCanvasTemplate />
            </label>
@@ -94,7 +94,7 @@ const from = location.state?.from?.pathname || "/";
            onBlur={handleValidateCaptcha} 
            type="text" name='captcha' placeholder="type the captcha above" 
            className="input input-bordered"  /> 
-        </div>
+        </div> */}
          <div className="form-control mt-3">
            <input 
           //  disabled={false} 

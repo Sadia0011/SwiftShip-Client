@@ -8,7 +8,7 @@ import useAxiosPublic from '../Hooks/useAxiosPublic';
 export const AuthContext=createContext(null)
 const AuthProvider = ({children}) => {
     const [user,setUser]=useState(null)
-
+    const [role, setRole] = useState(null);
     const [loading,setLoading]=useState(true)
 
 
@@ -59,13 +59,27 @@ useEffect(()=>{
         if(res.data.token){
             // console.log("token",res.data.token)
             localStorage.setItem('access-token',res.data.token)
+            setLoading(false)
         }
       })
         }
         else{
       localStorage.removeItem('access-token')
         }
-        setLoading(false)
+        
+
+        if(currentUser){
+            
+            fetch(
+                `https://swiftship-server.vercel.app/checkuser?email=${currentUser.email}`
+              )
+                .then((res) => res.json())
+                .then((data) => setRole(data.role));
+            } else {
+              setRole(null);
+            }
+            setLoading(false);
+        
     })
     return ()=>unSubscribe()
 },[axiosPublic])
@@ -78,7 +92,8 @@ useEffect(()=>{
            logout,
            updateUserProfile,
            updateUserProfileImage,
-           googleSignIn
+           googleSignIn,
+           role
     }
     
     return (

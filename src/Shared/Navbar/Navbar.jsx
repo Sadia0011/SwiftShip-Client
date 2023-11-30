@@ -4,16 +4,35 @@ import { Link, NavLink } from 'react-router-dom';
 import { IoMdNotifications } from "react-icons/io";
 import useAuth from '../../Hooks/useAuth';
 const Navbar = () => {
+  const {user,logout,role}=useAuth()
+  console.log(user,role)
+  let linkPath = "";
+
+  if (role === "admin") {
+    linkPath = "/dashboard/admin/statistics";
+  } else if (role === "deliveryman") {
+    linkPath = "/dashboard/deliveryman/deliverymanHome";
+  } else if (role === "user") {
+    linkPath = "/dashboard/user/userHome";
+  }
     const navLinks=<>
     <li><NavLink to={"/"}>Home</NavLink></li>
-    <li><NavLink to="/dashboard">Dashboard</NavLink></li>
+    <li><NavLink to={"/contact"}>Contact</NavLink></li>
+    <li><NavLink to={"/about"}>About Us</NavLink></li>
+    <li>
+        {role === "admin" && <Link to={linkPath}>Dashboard</Link>}
+
+        {role === "deliveryman" && <Link to={linkPath}>Dashboard</Link>}
+
+        {role === "user" && <Link to={linkPath}>Dashboard</Link>}
+      </li>
     <li><Link to={"/dashboard/cart"}><button className="btn btn-sm">
         <IoMdNotifications ></IoMdNotifications>
          <div className="badge  bg-blue-800 text-white">+{}</div>
          </button></Link></li>
     
     </>
-    const {user,logout}=useAuth()
+    
 const handleLogout=()=>{
   logout();
 }
@@ -47,7 +66,13 @@ const handleLogout=()=>{
 </label>
   <ul tabIndex={0} className="dropdown-content z-[10] menu p-2 shadow bg-base-100 rounded-box w-52">
     <li><NavLink to="/">{user.displayName}</NavLink></li>
-    <li><NavLink to="/dashboard">Dashboard</NavLink></li>
+    <li>
+        {role === "admin" && <Link to={linkPath}>Dashboard</Link>}
+
+        {role === "deliveryman" && <Link to={linkPath}>Dashboard</Link>}
+
+        {role === "user" && <Link to={linkPath}>Dashboard</Link>}
+      </li>
     <button onClick={handleLogout} className='btn'>logout</button>
   </ul>
 </div>

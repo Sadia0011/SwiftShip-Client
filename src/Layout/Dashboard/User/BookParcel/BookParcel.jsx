@@ -40,7 +40,8 @@ const handleWeightChange = (e) => {
 // console.log(weight,price)
       const onSubmit = (data) => {
         
-        console.log(data)
+        // console.log(data)
+        // console.log("price from submit",price)
         const newParcel = {
           name: data.name,
           email: data.email,
@@ -57,7 +58,7 @@ const handleWeightChange = (e) => {
           bookingDate: moment().format('l') ,
           status:"pending"
       }
-      // 
+      console.log("newParcel",newParcel)
       Swal.fire({
         title: "Are you sure?",
         text: "You want to book this!",

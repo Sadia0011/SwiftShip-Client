@@ -4,7 +4,7 @@ import {  AiOutlineSafety } from "react-icons/ai";
 import { MdOutlineDeliveryDining } from "react-icons/md";
 import { CgCommunity } from "react-icons/cg";
 import useAxiosPublic from '../../../Hooks/useAxiosPublic';
-import { FaCalendar, FaShopify, FaUsers } from 'react-icons/fa';
+import { FaBicycle, FaBook, FaCalendar, FaList, FaShopify, FaUsers } from 'react-icons/fa';
 import CountUp from 'react-countup';
 const FeaturedSection = () => {
   const [parcelBooked, setParcelBooked] = useState(0);
@@ -65,7 +65,7 @@ const FeaturedSection = () => {
  <div className="w-full p-4 text-center bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
     <h5 className="mb-2 text-3xl font-bold text-gray-900 dark:text-white">From Booking to Delivery, Faster Than Ever</h5>
     <p className="mb-5 text-base text-gray-500 sm:text-lg dark:text-gray-400"> Book parcels for delivery, let our efficient Admin assign the right delivery person, and experience swift and secure deliveries. Your packages, our priority.</p>
-    <div className="items-center justify-center space-y-4 sm:flex sm:space-y-0 sm:space-x-4 rtl:space-x-reverse">
+    {/* <div className="items-center justify-center space-y-4 sm:flex sm:space-y-0 sm:space-x-4 rtl:space-x-reverse">
         <div className="w-full sm:w-auto bg-slate-200 text-black hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-300  rounded-lg inline-flex items-center justify-center px-4 py-2.5 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700">
            <FaCalendar className='w-7'></FaCalendar> <div className="text-left rtl:text-right">
                 <div className="mb-1 text-xs">Parcel booked :</div>
@@ -84,7 +84,37 @@ const FeaturedSection = () => {
                 <div className="-mt-1  text-sm font-semibold"><CountUp end={registeredUsers} duration={3}></CountUp></div>
             </div>
         </div>
+    </div> */}
+    <div className="stats shadow">
+  
+  <div className="stat">
+    <div className="stat-figure text-secondary">
+      <FaBook className='text-3xl'></FaBook>
+         </div>
+    <div className="stat-title">Parcel booked</div>
+    <div className="stat-value"><CountUp end={parcelBooked} duration={3}></CountUp></div>
+    
+  </div>
+  
+  <div className="stat">
+    <div className="stat-figure text-secondary">
+     <FaBicycle className='text-4xl'></FaBicycle>
     </div>
+    <div className="stat-title">Parcel delivered</div>
+    <div className="stat-value"><CountUp end={parcelDelivered} duration={3}></CountUp></div>
+    
+  </div>
+  
+  <div className="stat">
+    <div className="stat-figure text-secondary">
+     <FaUsers className='text-3xl'></FaUsers>
+    </div>
+    <div className="stat-title">Users</div>
+    <div className="stat-value"><CountUp end={registeredUsers} duration={3}></CountUp></div>
+    
+  </div>
+  
+</div>
 </div>
 
 </div>

@@ -1,14 +1,32 @@
 import React from 'react';
 import { GrSwift } from 'react-icons/gr';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
+import useAuth from '../../Hooks/useAuth';
 
 const Footer = () => {
+  const{role}=useAuth();
+  let linkPath = "";
+
+  if (role === "admin") {
+    linkPath = "/dashboard/admin/statistics";
+  } else if (role === "deliveryman") {
+    linkPath = "/dashboard/deliveryman/deliverymanHome";
+  } else if (role === "user") {
+    linkPath = "/dashboard/user/userHome";
+  }
     return (
         <footer className="footer footer-center p-10 bg-slate-100 text-base-content rounded">
   <nav className="grid grid-flow-col gap-4">
     <NavLink to="/"  className="link link-hover">Home</NavLink>
-    <NavLink to="/dashboard" className="link link-hover">Dashboard</NavLink>
-    <NavLink to="/" className="link link-hover">Contact</NavLink>
+    
+        {role === "admin" && <Link to={linkPath}>Dashboard</Link>}
+
+        {role === "deliveryman" && <Link to={linkPath}>Dashboard</Link>}
+
+        {role === "user" && <Link to={linkPath}>Dashboard</Link>}
+      
+    <NavLink to="/contact" className="link link-hover">Contact</NavLink>
+    <NavLink to="/about" className="link link-hover">About Us</NavLink>
 
   </nav> 
   <nav>

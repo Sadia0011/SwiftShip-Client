@@ -104,8 +104,12 @@ const Dashboard = () => {
                <FaHome></FaHome> Home</NavLink>
             </li>
             <li>
-               <NavLink to={"/dashboard"}> 
-               <FaDatabase></FaDatabase> Dashboard</NavLink>
+               <NavLink to={"/contact"}> 
+               <FaMailBulk></FaMailBulk> Contact</NavLink>
+            </li>
+            <li>
+               <NavLink to={"/about"}> 
+               <FaMailBulk></FaMailBulk> About Us</NavLink>
             </li>
             
            </ul>

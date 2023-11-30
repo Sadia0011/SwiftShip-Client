@@ -27,6 +27,8 @@ import DeliverymanHome from '../Layout/Dashboard/DelivaryMan/DeliverymanHome/Del
 import Payment from '../Layout/Dashboard/Payment/Payment';
 import Success from '../Layout/Dashboard/Payment/Success';
 import PaymentHistory from '../Layout/Dashboard/User/PaymentHistory/PaymentHistory';
+import Contact from '../pages/Contact/Contact';
+import About from '../pages/About/About';
 
   
 export  const router = createBrowserRouter([
@@ -37,6 +39,12 @@ export  const router = createBrowserRouter([
       children:[
        { path:"/",
          element:<Home></Home>    
+       },
+       { path:"/contact",
+         element:<Contact></Contact>  
+       },
+       { path:"/about",
+         element:<About></About>
        },
        { path:"/login",
          element:<Login></Login>    
@@ -68,12 +76,12 @@ export  const router = createBrowserRouter([
         {
             path:"payment/:id",
             element:<Payment></Payment>,
-            loader:({params})=>fetch(`http://localhost:5000/bookParcelForOneItem/${params.id}`)
+            loader:({params})=>fetch(`https://swiftship-server.vercel.app/bookParcelForOneItem/${params.id}`)
         },
         {
             path:"user/updateParcel/:id",
             element:<UpdateParcel></UpdateParcel>,
-            loader:({params})=>fetch(`http://localhost:5000/bookParcelForOneItem/${params.id}`)
+            loader:({params})=>fetch(`https://swiftship-server.vercel.app/bookParcelForOneItem/${params.id}`)
         },
         {
             path:"user/myParcel",
